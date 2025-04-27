@@ -1,13 +1,21 @@
 package br.com.boardmanager;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import br.com.boardmanager.persistence.migration.MigrationStrategy;
+import br.com.boardmanager.ui.MainMenu;
 
-@SpringBootApplication
+
+import java.sql.SQLException;
+
+import static br.com.boardmanager.persistence.config.ConnectionConfig.getConnection;
+
+
 public class BoardmanagerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BoardmanagerApplication.class, args);
-	}
+    public static void main(String[] args) throws SQLException {
+        try (var connection = getConnection()) {
+            new MigrationStrategy(connection).executeMigration();
+        }
+        new MainMenu().execute();
+    }
 
 }

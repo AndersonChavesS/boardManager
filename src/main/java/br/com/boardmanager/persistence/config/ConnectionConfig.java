@@ -1,6 +1,5 @@
 package br.com.boardmanager.persistence.config;
 
-
 import lombok.NoArgsConstructor;
 
 import java.sql.Connection;
@@ -10,9 +9,9 @@ import java.sql.SQLException;
 import static lombok.AccessLevel.PRIVATE;
 
 @NoArgsConstructor(access = PRIVATE)
-public class ConnectionConfig {
+public final class ConnectionConfig {
 
-    public static Connection getConnerction() throws SQLException {
+    public static Connection getConnection() throws SQLException {
 
         var url = "jdbc:mysql://localhost/board";
         var user = "board";
